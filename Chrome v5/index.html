@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chrome Browser</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'><circle cx='24' cy='24' r='20' fill='%234285F4'/></svg>">
+    <link rel="stylesheet" href="style.css">
+    <script src="uv.config.js"></script>
+</head>
+<body class="bg-zinc-900 text-white m-0 p-0 h-screen flex flex-col overflow-hidden">
+    <div id="browser-container" class="flex flex-col h-full w-full">
+        <div class="bg-zinc-800 border-b border-zinc-700 px-2 py-2 flex items-center gap-1">
+            <div class="flex gap-1">
+                <button id="btn-back" class="p-2 hover:bg-zinc-700 rounded transition" title="Back">
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+                    </svg>
+                </button>
+                <button id="btn-forward" class="p-2 hover:bg-zinc-700 rounded transition" title="Forward">
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+                    </svg>
+                </button>
+                <button id="btn-refresh" class="p-2 hover:bg-zinc-700 rounded transition" title="Refresh">
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-8 3.58-8 8s3.58 8 8 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="flex-1 flex items-center gap-2 ml-2">
+                <div class="flex-1 bg-zinc-700 rounded-full px-4 py-2 flex items-center gap-2 focus-within:ring-2 focus-within:ring-blue-500">
+                    <svg class="w-4 h-4 text-zinc-400" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm3.5-9c.83 0 1.5-.67 1.5-1.5S16.33 8 15.5 8 14 8.67 14 9.5s.67 1.5 1.5 1.5zm-7 0c.83 0 1.5-.67 1.5-1.5S9.33 8 8.5 8 7 8.67 7 9.5 7.67 11 8.5 11zm3.5 6.5c2.33 0 4.31-1.46 5.11-3.5H6.89c.8 2.04 2.78 3.5 5.11 3.5z"/>
+                    </svg>
+                    <input 
+                        id="address-bar" 
+                        type="text" 
+                        class="flex-1 bg-transparent outline-none text-sm placeholder-zinc-400"
+                        placeholder="Search Google or type a URL"
+                    >
+                </div>
+            </div>
+            <div class="flex items-center gap-1">
+                <button id="btn-cloak" class="p-2 hover:bg-zinc-700 rounded transition" title="Tab Cloaker">
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>
+                    </svg>
+                </button>
+                <button id="btn-blank" class="p-2 hover:bg-zinc-700 rounded transition" title="Open in About:Blank">
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
+                    </svg>
+                </button>
+                <button id="btn-menu" class="p-2 hover:bg-zinc-700 rounded transition" title="Menu">
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <div id="tab-bar" class="bg-zinc-800 border-b border-zinc-700 flex items-center h-12 px-2 gap-1 overflow-x-auto scrollbar-hide"></div>
+        <div id="content-area" class="flex-1 overflow-hidden relative">
+            <iframe id="content-frame" class="w-full h-full border-0" sandbox="allow-scripts allow-forms allow-popups allow-top-navigation allow-modals allow-pointer-lock"></iframe>
+        </div>
+        <div id="status-bar" class="bg-zinc-900 border-t border-zinc-700 px-3 py-1 text-xs text-zinc-400 h-6 flex items-center">
+            <span id="status-text">Ready</span>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
